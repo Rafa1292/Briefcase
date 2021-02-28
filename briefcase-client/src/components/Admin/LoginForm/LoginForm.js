@@ -24,7 +24,22 @@ export default function LoginForm() {
   const login = async (e)=> {
       e.preventDefault();
       const result = await signInApi(inputs);
-      console.log(result);
+      if (!result.ok) {
+        notification["error"]({
+          message : result.message
+        });
+      }else{
+        const {accessToken, refreshToken} = result.content;
+        console.log(result);
+        localStorage.setItem(ACCESS_TOKEN, accessToken);
+        localStorage.setItem(REFRESH_TOKEN, refreshToken);
+        notification["success"]({
+          message: "Login correcto"
+        });
+
+        window.location.href = "/admin";
+
+      }
   }
 
   return (

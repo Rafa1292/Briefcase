@@ -5,6 +5,7 @@ import MenuTop from "../components/Admin/MenuTop";
 import MenuSider from "../components/Admin/MenuSider";
 import AdminSignIn from "../pages/Admin/SignIn/SignIn";
 import {Route, Redirect} from "react-router-dom";
+import {getAccessToken, getRefreshToken} from '../api/auth'
 import "./LayoutAdmin.scss";
 
 export default function LayoutAdmin({ routes }) {
@@ -12,6 +13,11 @@ export default function LayoutAdmin({ routes }) {
   const [menuCollapsed, setMenuCollapsed] = useState(true);
 
   const user = null;
+
+  const accessToken = getAccessToken();
+  console.log(`AccessToken: ${accessToken}`)
+  const refreshToken = getRefreshToken();
+  console.log(`refreshToken: ${refreshToken}`)
 
   if (!user) {
     return(

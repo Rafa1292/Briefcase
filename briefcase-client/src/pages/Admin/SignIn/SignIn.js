@@ -3,11 +3,17 @@ import { Layout, Tabs } from "antd";
 import LoginForm from "../../../components/Admin/LoginForm";
 import Logo from "../../../assets/img/logoNebulosa.png";
 import RegisterForm from "../../../components/Admin/RegisterForm";
+import {getAccessTokenApi} from '../../../api/auth'
 import "./SignIn.scss";
+import { Redirect } from "react-router";
 
 export default function SignIn() {
   const { Content } = Layout;
   const { TabPane } = Tabs;
+
+  if (getAccessTokenApi()) {
+    return <Redirect to="/admin"/>
+  }
 
   return (
     <Layout className="sign-in">
